@@ -7,7 +7,7 @@ Usage:
 In your main module you will need the following:  
 The following defines the separate modules to your main module. 
 
-local baseclass = require "simpleclass"  -- this is the base class on top of which all subclasses are built. 
+local baseclass = require "baseclass"  -- this is the base class on top of which all subclasses are built. 
 local subclass = require "subclass"  -- first subclass
 local subsubclass = require "subsubclass"  -- second subclass
 
@@ -15,7 +15,7 @@ Since baseclass stands alone, you could start using functions from this module i
 S1inst = baseclass:new()
 S1inst:classname()
 Output:  
-simpleclass: classname function 
+baseclass: classname function 
 
 However, the subclasses only contain a fraction of the functions available from the base.  So you will need to inherit all the functions from the base to build the sublass.  
 local S2class = subclass:inheritsFrom(baseclass)
@@ -31,10 +31,10 @@ local S3inst = S3class:new()
 S2inst:classname() 
 Output:  sub:  classname
 S2inst:classname2() 
-Output: simpleclass: classname function  -- note subclass didn't have a function called classname2 so the function located in baseclass is used.  
+Output: baseclass: classname function  -- note subclass didn't have a function called classname2 so the function located in baseclass is used.  
 S3inst:classname() 
 Output:  subsub: classname 
 S3inst:classname2() 
-Output: simpleclass: classname function  -- note subclass nor subsubclass have a function called classname2 so the function located in baseclass is used.
+Output: baseclass: classname function  -- note subclass nor subsubclass have a function called classname2 so the function located in baseclass is used.
 
 Using these simple modules an OOP inheritence may be implemented. 
