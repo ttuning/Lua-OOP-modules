@@ -14,8 +14,7 @@ local subsubclass = require "subsubclass"  -- second subclass
 Since baseclass stands alone, you could start using functions from this module immediately. 
 S1inst = baseclass:new()
 S1inst:classname()
-Output:  
-baseclass: classname function 
+Output:  baseclass: classname function 
 
 However, the subclasses only contain a fraction of the functions available from the base.  So you will need to inherit all the functions from the base to build the sublass.  
 local S2class = subclass:inheritsFrom(baseclass)
