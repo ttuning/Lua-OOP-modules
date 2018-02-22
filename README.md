@@ -25,16 +25,22 @@ You can build on your newly created S2class and build a subsubclass.
 local S3class = subsubclass:inheritsFrom(S2class)
 
 We now have our classes so let's start using them.  First create instance of the class by classing the new function. 
+
 local S2inst = S2class:new()
 local S3inst = S3class:new()
 
 S2inst:classname() 
+
 Output:  sub:  classname
+
 S2inst:classname2() 
+
 Output: baseclass: classname function  -- note subclass didn't have a function called classname2 so the function located in baseclass is used.  
 S3inst:classname() 
+
 Output:  subsub: classname 
 S3inst:classname2() 
+
 Output: baseclass: classname function  -- note subclass nor subsubclass have a function called classname2 so the function located in baseclass is used.
 
 Using these simple modules an OOP inheritence may be implemented. 
