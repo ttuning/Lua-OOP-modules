@@ -21,18 +21,18 @@ local M = {}
 local M_mt = { __index = M }
 
 
+
 -- return new object
 function M:new( )
+
+    local self = {}
+    self.DG = display.newGroup()  -- use DG as table to hold functions.  This allows for use of finalize function in destroy
+	self.DG.antecedent = self 
+    setmetatable( self, M_mt ) 
 	
-	print ("subclass new function")
-	local self = {}
-    setmetatable( self, M_mt )  --  new object inherits from ...
-	
-	for k, v in pairs(M) do  -- copy meta table to main table. 
-		print ("subclass meta keys",  k )
-		-- self[k] = v
-	end
-	
+	self.DG.finalize = self.finalizeDG
+	self.DG:addEventListener("finalize")
+
     return self
 
 end
@@ -40,7 +40,7 @@ end
 -- Create a new class that inherits from a base class
 --
 function M:inheritsFrom( baseClass )
-   
+
     -- The following is the key to implementing inheritance:
 
     -- The __index member of the new class's metatable references the
@@ -56,9 +56,35 @@ function M:inheritsFrom( baseClass )
 end
 
 function M:classname()
-	print ("sub:  classname ")
+	print ("baseClassDG:  classname function  ")
 return 
 end 
+
+function M:classname2()
+	print ("baseClassDG:  classname2 function  ")
+return 
+end 
+
+-- If this DG was deleted by composer destroy can't be called.  
+function M:finalizeDG()
+	-- add code to delete timers 
+	print ("baseClassDG finalize")
+	transition.cancel(self) -- add code to cancel any transitions.  
+	
+	self.antecedent = nil -- nil master table. Only the DG finalize should do this when imgs are inserted into DG.
+	self = nil
+	
+return 	
+end
+
+--  delete this object 
+function M:destroy()
+
+	display.remove(self.DG)
+	self = nil
+	
+return
+end
 
 
 

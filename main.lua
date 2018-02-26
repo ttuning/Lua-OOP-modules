@@ -12,7 +12,7 @@ local subclass = require "subclass"  -- first subclass
 local subsubclass = require "subsubclass"  -- second subclass
 
 -- Since baseclass stands alone, you could start using functions from this module immediately. 
-S1inst = baseclass:new()
+local S1inst = baseclass:new()
 S1inst:classname()
 -- Output:  
 -- baseclass: classname function 
@@ -36,5 +36,25 @@ S3inst:classname()
 -- Output:  subsub: classname 
 S3inst:classname2() 
 -- Output: baseclass: classname function  -- note subclass nor subsubclass have a function called classname2 so the function located in baseclass is used.
+S1inst:destroy()
+S2inst:destroy()
+S3inst:destroy()
 
 -- Using these simple modules an OOP inheritence may be implemented. 
+print ("------------------------------------------------------------------------------------")
+print ("------Corona SDK example using Display Groups                               --------")
+print ("------------------------------------------------------------------------------------")
+local baseclassDG = require "baseclassDG"  -- Uses a DG as the base class instead of a table. This assumes you are using the corona SDK 
+local subclassDG = require "subclassDG"  -- first subclass
+
+local S1DGinst = baseclassDG:new()
+S1DGinst:classname()
+local S2DGclass = subclassDG:inheritsFrom(baseclassDG)
+local S2DGinst = S2DGclass:new()
+
+S2DGinst:classname() 
+S2DGinst:classname2() 
+S1DGinst:destroy()
+S2DGinst:destroy()
+
+

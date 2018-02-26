@@ -26,13 +26,14 @@ function M:new( )
 	
 	print ("subclass new function")
 	local self = {}
-    setmetatable( self, M_mt )  --  new object inherits from ...
+	self.DG = display.newGroup() 
+	self.DG.antecedent = self 
 	
-	for k, v in pairs(M) do  -- copy meta table to main table. 
-		print ("subclass meta keys",  k )
-		-- self[k] = v
-	end
+	setmetatable( self, M_mt )  --  new object inherits from ...
 	
+	self.DG.finalize = self.finalizeDG
+	self.DG:addEventListener("finalize")
+    
     return self
 
 end
@@ -56,7 +57,7 @@ function M:inheritsFrom( baseClass )
 end
 
 function M:classname()
-	print ("sub:  classname ")
+	print ("subDG:  classname ")
 return 
 end 
 
