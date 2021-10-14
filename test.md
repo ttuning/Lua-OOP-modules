@@ -27,7 +27,6 @@ The [ESP reference architectures use the standard definitions](definitions.md) f
 
 [TOC]
 
-*toc test
-
+* TOC
 {:toc}
 
